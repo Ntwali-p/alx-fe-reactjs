@@ -3,12 +3,14 @@ import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 import AddRecipeForm from './components/AddRecipeForm';
 import EditRecipeForm from './components/EditRecipeForm';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{ width: '600px', margin: 'auto' }}>
         <h1>Recipe Sharing App</h1>
+        <SearchBar />
         <Routes>
           <Route path="/" element={<RecipeList />} />
           <Route path="/recipe/:id" element={<RecipeDetailsWrapper />} />
@@ -20,7 +22,6 @@ function App() {
   );
 }
 
-// Wrappers to extract ID from URL and pass as prop
 import { useParams } from 'react-router-dom';
 
 const RecipeDetailsWrapper = () => {
