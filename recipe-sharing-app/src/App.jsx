@@ -1,37 +1,29 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RecipeList from './components/RecipeList';
-import RecipeDetails from './components/RecipeDetails';
-import AddRecipeForm from './components/AddRecipeForm';
-import EditRecipeForm from './components/EditRecipeForm';
-import SearchBar from './components/SearchBar';
+import FavoritesList from './FavoritesList';
+import RecommendationsList from './RecommendationsList';
+import { useRecipeStore } from './recipeStore';
 
 function App() {
+  const recipes = useRecipeStore(state => state.recipes);
+  const addFavorite = useRecipeStore(state => state.addFavorite);
+
   return (
-    <Router>
-      <div style={{ width: '600px', margin: 'auto' }}>
-        <h1>Recipe Sharing App</h1>
-        <SearchBar />
-        <Routes>
-          <Route path="/" element={<RecipeList />} />
-          <Route path="/recipe/:id" element={<RecipeDetailsWrapper />} />
-          <Route path="/add" element={<AddRecipeForm />} />
-          <Route path="/edit/:id" element={<EditRecipeFormWrapper />} />
-        </Routes>
+    <div>
+      <h1>Recipe Sharing App</h1>
+
+      <div>
+        <h2>All Recipes</h2>
+        {recipes.map(recipe => (
+          <div key={recipe.id}>
+            <h3>{recipe.title}</h3>
+            <button onClick={() => addFavorite(recipe.id)}>Add to Favorites</button>
+          </div>
+        ))}
       </div>
-    </Router>
+
+      <FavoritesList />
+      <RecommendationsList />
+    </div>
   );
 }
-
-import { useParams } from 'react-router-dom';
-
-const RecipeDetailsWrapper = () => {
-  const { id } = useParams();
-  return <RecipeDetails recipeId={id} />;
-};
-
-const EditRecipeFormWrapper = () => {
-  const { id } = useParams();
-  return <EditRecipeForm recipeId={id} />;
-};
 
 export default App;
