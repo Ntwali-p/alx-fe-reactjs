@@ -1,30 +1,36 @@
-import { Link, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
+import AddRecipeForm from './components/AddRecipeForm';
+import EditRecipeForm from './components/EditRecipeForm';
 
 function App() {
   return (
-    <div style={{ padding: 20, maxWidth: 720, margin: '0 auto' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
-        <h1 style={{ margin: 0 }}>Recipe Sharing Application</h1>
-        <nav><Link to="/">Home</Link></nav>
-      </header>
-
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <AddRecipeForm />
-              <RecipeList />
-            </>
-          }
-        />
-        <Route path="/recipes/:id" element={<RecipeDetails />} />
-      </Routes>
-    </div>
+    <Router>
+      <div>
+        <h1>Recipe Sharing App</h1>
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipe/:id" element={<RecipeDetailsWrapper />} />
+          <Route path="/add" element={<AddRecipeForm />} />
+          <Route path="/edit/:id" element={<EditRecipeFormWrapper />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
+// Wrappers to extract ID from URL and pass as prop
+import { useParams } from 'react-router-dom';
+
+const RecipeDetailsWrapper = () => {
+  const { id } = useParams();
+  return <RecipeDetails recipeId={id} />;
+};
+
+const EditRecipeFormWrapper = () => {
+  const { id } = useParams();
+  return <EditRecipeForm recipeId={id} />;
+};
 
 export default App;
