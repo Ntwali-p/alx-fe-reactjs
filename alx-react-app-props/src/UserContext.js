@@ -1,7 +1,10 @@
 import { createContext } from 'react';
 
-// Initialize Context using React.createContext()
-export const UserContext = createContext();
+// Initialize with default value
+const UserContext = createContext({
+  name: '',
+  email: ''
+});
 
-// Or you can also export as default
+// Export the context
 export default UserContext;
