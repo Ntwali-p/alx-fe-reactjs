@@ -1,16 +1,14 @@
 import React from 'react';
-import Header from './components/Header';
-import MainContent from './components/MainContent';
-import Footer from './components/Footer';
 
-function App() {
+function MainContent() {
   return (
-    <div>
-      <Header />
-      <MainContent />
-      <Footer />
-    </div>
+    <main style={{ padding: '20px', backgroundColor: '#eef2f3', textAlign: 'center' }}>
+      <p style={{ fontSize: '18px', color: '#333' }}>
+        I love to visit New York, Paris, and Tokyo.
+      </p>
+    </main>
   );
 }
 
-export default App;
+export default MainContent;
+
