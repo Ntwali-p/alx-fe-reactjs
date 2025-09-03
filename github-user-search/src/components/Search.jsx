@@ -21,7 +21,7 @@ const Search = () => {
       const userData = await fetchUserData(username);
       setUser(userData);
     } catch (err) {
-      setError("Looks like we can’t find the user");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -44,7 +44,7 @@ const Search = () => {
 
       <div style={{ marginTop: "20px" }}>
         {loading && <p>Loading...</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>Looks like we cant find the user</p>}
         {user && (
           <div style={{ marginTop: "20px" }}>
             <img
